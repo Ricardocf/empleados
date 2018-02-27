@@ -1,0 +1,29 @@
+<?php $__env->startSection('title', 'Home'); ?>
+<?php $__env->startSection('content'); ?>
+	<a href="<?php echo e(route('empleados.create')); ?>" class="btn btn-info">Registrar nuevo empleado</a><hr>
+	<?php if($empleados->total() > 0): ?>
+    	<table class="table table-striped">
+			<thead>
+				<th>Nombre</th>
+				<th>email</th>
+				<th>ver datos</th>
+			</thead>
+			<tbody>
+				<?php foreach($empleados as $empleado): ?>
+					<tr>
+						<td><?php echo e($empleado->nombre); ?></td>
+						<td><?php echo e($empleado->email); ?></td>
+						<td>
+							<a href="<?php echo e(route('empleados.show', $empleado->id)); ?>" class="btn btn-primary"><span class="glyphicon glyphicon-search" aria-hidden="true"></a></span>
+						</td>
+					</tr>
+				<?php endforeach; ?>
+			</tbody>
+		</table>
+		<?php echo $empleados->render(); ?>
+
+	<?php else: ?>
+		<h3>No hay resultados para mostrar</h3>
+	<?php endif; ?>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('template', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
